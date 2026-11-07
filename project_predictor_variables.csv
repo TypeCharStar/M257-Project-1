@@ -1,0 +1,221 @@
+Variable Name,Variable Description
+DP02_0003P,Percent!!HOUSEHOLDS BY TYPE!!Total households!!Married-couple household!!With children of the householder under 18 years
+DP02_0005P,Percent!!HOUSEHOLDS BY TYPE!!Total households!!Cohabiting couple household!!With children of the householder under 18 years
+DP02_0007P,"Percent!!HOUSEHOLDS BY TYPE!!Total households!!Male householder, no spouse/partner present!!With children of the householder under 18 years"
+DP02_0009P,"Percent!!HOUSEHOLDS BY TYPE!!Total households!!Male householder, no spouse/partner present!!Householder living alone!!65 years and over"
+DP02_0011P,"Percent!!HOUSEHOLDS BY TYPE!!Total households!!Female householder, no spouse/partner present!!With children of the householder under 18 years"
+DP02_0013P,"Percent!!HOUSEHOLDS BY TYPE!!Total households!!Female householder, no spouse/partner present!!Householder living alone!!65 years and over"
+DP02_0026P,Percent!!MARITAL STATUS!!Males 15 years and over!!Never married
+DP02_0027P,"Percent!!MARITAL STATUS!!Males 15 years and over!!Now married, except separated"
+DP02_0029P,Percent!!MARITAL STATUS!!Males 15 years and over!!Widowed
+DP02_0030P,Percent!!MARITAL STATUS!!Males 15 years and over!!Divorced
+DP02_0032P,Percent!!MARITAL STATUS!!Females 15 years and over!!Never married
+DP02_0033P,"Percent!!MARITAL STATUS!!Females 15 years and over!!Now married, except separated"
+DP02_0035P,Percent!!MARITAL STATUS!!Females 15 years and over!!Widowed
+DP02_0036P,Percent!!MARITAL STATUS!!Females 15 years and over!!Divorced
+DP02_0037P,Percent!!FERTILITY!!Number of women 15 to 50 years old who had a birth in the past 12 months
+DP02_0054P,"Percent!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school, preschool"
+DP02_0056P,Percent!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Elementary school (grades 1-8)
+DP02_0057P,Percent!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!High school (grades 9-12)
+DP02_0058P,Percent!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school
+DP02_0060P,Percent!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Less than 9th grade
+DP02_0062P,Percent!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate (includes equivalency)
+DP02_0063P,"Percent!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Some college, no degree"
+DP02_0064P,Percent!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Associate's degree
+DP02_0065P,Percent!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree
+DP02_0066P,Percent!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Graduate or professional degree
+DP02_0070P,Percent!!VETERAN STATUS!!Civilian population 18 years and over!!Civilian veterans
+DP02_0074P,Percent!!DISABILITY STATUS OF THE CIVILIAN NONINSTITUTIONALIZED POPULATION!!Under 18 years!!With a disability
+DP02_0076P,Percent!!DISABILITY STATUS OF THE CIVILIAN NONINSTITUTIONALIZED POPULATION!!18 to 64 years!!With a disability
+DP02_0078P,Percent!!DISABILITY STATUS OF THE CIVILIAN NONINSTITUTIONALIZED POPULATION!!65 years and over!!With a disability
+DP02_0080P,Percent!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Same house
+DP02_0082P,Percent!!RESIDENCE 1 YEAR AGO!!Population 1 year and over!!Different house (in the U.S. or abroad)!!Different house in the U.S.
+DP02_0091P,Percent!!PLACE OF BIRTH!!Total population!!Native!!Born in United States!!State of residence
+DP02_0094P,Percent!!PLACE OF BIRTH!!Total population!!Foreign born
+DP02_0096P,Percent!!U.S. CITIZENSHIP STATUS!!Foreign-born population!!Naturalized U.S. citizen
+DP02_0104P,Percent!!YEAR OF ENTRY!!Population born outside the United States!!Foreign born!!Entered before 2010
+DP02_0106P,"Percent!!WORLD REGION OF BIRTH OF FOREIGN BORN!!Foreign-born population, excluding population born at sea!!Europe"
+DP02_0107P,"Percent!!WORLD REGION OF BIRTH OF FOREIGN BORN!!Foreign-born population, excluding population born at sea!!Asia"
+DP02_0108P,"Percent!!WORLD REGION OF BIRTH OF FOREIGN BORN!!Foreign-born population, excluding population born at sea!!Africa"
+DP02_0109P,"Percent!!WORLD REGION OF BIRTH OF FOREIGN BORN!!Foreign-born population, excluding population born at sea!!Oceania"
+DP02_0110P,"Percent!!WORLD REGION OF BIRTH OF FOREIGN BORN!!Foreign-born population, excluding population born at sea!!Latin America"
+DP02_0113P,Percent!!LANGUAGE SPOKEN AT HOME!!Population 5 years and over!!English only
+DP02_0116P,Percent!!LANGUAGE SPOKEN AT HOME!!Population 5 years and over!!Spanish
+DP02_0118P,Percent!!LANGUAGE SPOKEN AT HOME!!Population 5 years and over!!Other Indo-European languages
+DP02_0120P,Percent!!LANGUAGE SPOKEN AT HOME!!Population 5 years and over!!Asian and Pacific Islander languages
+DP02_0125P,Percent!!ANCESTRY!!Total population!!American
+DP02_0126P,Percent!!ANCESTRY!!Total population!!Arab
+DP02_0127P,Percent!!ANCESTRY!!Total population!!Czech
+DP02_0128P,Percent!!ANCESTRY!!Total population!!Danish
+DP02_0129P,Percent!!ANCESTRY!!Total population!!Dutch
+DP02_0130P,Percent!!ANCESTRY!!Total population!!English
+DP02_0131P,Percent!!ANCESTRY!!Total population!!French (except Basque)
+DP02_0132P,Percent!!ANCESTRY!!Total population!!French Canadian
+DP02_0133P,Percent!!ANCESTRY!!Total population!!German
+DP02_0134P,Percent!!ANCESTRY!!Total population!!Greek
+DP02_0135P,Percent!!ANCESTRY!!Total population!!Hungarian
+DP02_0136P,Percent!!ANCESTRY!!Total population!!Irish
+DP02_0137P,Percent!!ANCESTRY!!Total population!!Italian
+DP02_0138P,Percent!!ANCESTRY!!Total population!!Lithuanian
+DP02_0139P,Percent!!ANCESTRY!!Total population!!Norwegian
+DP02_0140P,Percent!!ANCESTRY!!Total population!!Polish
+DP02_0141P,Percent!!ANCESTRY!!Total population!!Portuguese
+DP02_0142P,Percent!!ANCESTRY!!Total population!!Russian
+DP02_0143P,Percent!!ANCESTRY!!Total population!!Scotch-Irish
+DP02_0144P,Percent!!ANCESTRY!!Total population!!Scottish
+DP02_0145P,Percent!!ANCESTRY!!Total population!!Slovak
+DP02_0146P,Percent!!ANCESTRY!!Total population!!Subsaharan African
+DP02_0147P,Percent!!ANCESTRY!!Total population!!Swedish
+DP02_0148P,Percent!!ANCESTRY!!Total population!!Swiss
+DP02_0149P,Percent!!ANCESTRY!!Total population!!Ukrainian
+DP02_0150P,Percent!!ANCESTRY!!Total population!!Welsh
+DP02_0151P,Percent!!ANCESTRY!!Total population!!West Indian (excluding Hispanic origin groups)
+DP02_0153P,Percent!!COMPUTERS AND INTERNET USE!!Total households!!With a computer
+DP02_0154P,Percent!!COMPUTERS AND INTERNET USE!!Total households!!With a broadband Internet subscription
+DP03_0006P,Percent!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces
+DP03_0009P,Percent!!EMPLOYMENT STATUS!!Civilian labor force!!Unemployment Rate
+DP03_0012P,Percent!!EMPLOYMENT STATUS!!Females 16 years and over!!In labor force!!Civilian labor force
+DP03_0013P,Percent!!EMPLOYMENT STATUS!!Females 16 years and over!!In labor force!!Civilian labor force!!Employed
+DP03_0020P,"Percent!!COMMUTING TO WORK!!Workers 16 years and over!!Car, truck, or van -- carpooled"
+DP03_0021P,Percent!!COMMUTING TO WORK!!Workers 16 years and over!!Public transportation (excluding taxicab)
+DP03_0022P,Percent!!COMMUTING TO WORK!!Workers 16 years and over!!Walked
+DP03_0024P,Percent!!COMMUTING TO WORK!!Workers 16 years and over!!Worked from home
+DP03_0033P,"Percent!!INDUSTRY!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining"
+DP03_0034P,Percent!!INDUSTRY!!Civilian employed population 16 years and over!!Construction
+DP03_0035P,Percent!!INDUSTRY!!Civilian employed population 16 years and over!!Manufacturing
+DP03_0036P,Percent!!INDUSTRY!!Civilian employed population 16 years and over!!Wholesale trade
+DP03_0037P,Percent!!INDUSTRY!!Civilian employed population 16 years and over!!Retail trade
+DP03_0038P,"Percent!!INDUSTRY!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities"
+DP03_0039P,Percent!!INDUSTRY!!Civilian employed population 16 years and over!!Information
+DP03_0040P,"Percent!!INDUSTRY!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing"
+DP03_0041P,"Percent!!INDUSTRY!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services"
+DP03_0042P,"Percent!!INDUSTRY!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance"
+DP03_0043P,"Percent!!INDUSTRY!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services"
+DP03_0045P,Percent!!INDUSTRY!!Civilian employed population 16 years and over!!Public administration
+DP03_0048P,Percent!!CLASS OF WORKER!!Civilian employed population 16 years and over!!Government workers
+DP03_0049P,Percent!!CLASS OF WORKER!!Civilian employed population 16 years and over!!Self-employed in own not incorporated business workers
+DP03_0050P,Percent!!CLASS OF WORKER!!Civilian employed population 16 years and over!!Unpaid family workers
+DP03_0052P,"Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!Less than $10,000"
+DP03_0053P,"Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!$10,000 to $14,999"
+DP03_0054P,"Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!$15,000 to $24,999"
+DP03_0055P,"Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!$25,000 to $34,999"
+DP03_0056P,"Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!$35,000 to $49,999"
+DP03_0057P,"Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!$50,000 to $74,999"
+DP03_0059P,"Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!$100,000 to $149,999"
+DP03_0060P,"Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!$150,000 to $199,999"
+DP03_0061P,"Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!$200,000 or more"
+DP03_0066P,Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!With Social Security
+DP03_0068P,Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!With retirement income
+DP03_0072P,Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!With cash public assistance income
+DP03_0074P,Percent!!INCOME AND BENEFITS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Total households!!With Food Stamp/SNAP benefits in the past 12 months
+DP03_0107P,Percent!!HEALTH INSURANCE COVERAGE!!Civilian noninstitutionalized population 19 to 64 years!!In labor force:!!Employed:!!With health insurance coverage!!With public coverage
+DP03_0108P,Percent!!HEALTH INSURANCE COVERAGE!!Civilian noninstitutionalized population 19 to 64 years!!In labor force:!!Employed:!!No health insurance coverage
+DP03_0112P,Percent!!HEALTH INSURANCE COVERAGE!!Civilian noninstitutionalized population 19 to 64 years!!In labor force:!!Unemployed:!!With health insurance coverage!!With public coverage
+DP03_0113P,Percent!!HEALTH INSURANCE COVERAGE!!Civilian noninstitutionalized population 19 to 64 years!!In labor force:!!Unemployed:!!No health insurance coverage
+DP03_0117P,Percent!!HEALTH INSURANCE COVERAGE!!Civilian noninstitutionalized population 19 to 64 years!!Not in labor force:!!With health insurance coverage!!With public coverage
+DP03_0118P,Percent!!HEALTH INSURANCE COVERAGE!!Civilian noninstitutionalized population 19 to 64 years!!Not in labor force:!!No health insurance coverage
+DP03_0134P,Percent!!PERCENTAGE OF FAMILIES AND PEOPLE WHOSE INCOME IN THE PAST 12 MONTHS IS BELOW THE POVERTY LEVEL!!All people!!18 years and over!!18 to 64 years
+DP03_0135P,Percent!!PERCENTAGE OF FAMILIES AND PEOPLE WHOSE INCOME IN THE PAST 12 MONTHS IS BELOW THE POVERTY LEVEL!!All people!!18 years and over!!65 years and over
+DP04_0007P,"Percent!!UNITS IN STRUCTURE!!Total housing units!!1-unit, detached"
+DP04_0009P,Percent!!UNITS IN STRUCTURE!!Total housing units!!2 units
+DP04_0010P,Percent!!UNITS IN STRUCTURE!!Total housing units!!3 or 4 units
+DP04_0011P,Percent!!UNITS IN STRUCTURE!!Total housing units!!5 to 9 units
+DP04_0012P,Percent!!UNITS IN STRUCTURE!!Total housing units!!10 to 19 units
+DP04_0013P,Percent!!UNITS IN STRUCTURE!!Total housing units!!20 or more units
+DP04_0014P,Percent!!UNITS IN STRUCTURE!!Total housing units!!Mobile home
+DP04_0015P,"Percent!!UNITS IN STRUCTURE!!Total housing units!!Boat, RV, van, etc."
+DP04_0017P,Percent!!YEAR STRUCTURE BUILT!!Total housing units!!Built 2020 or later
+DP04_0018P,Percent!!YEAR STRUCTURE BUILT!!Total housing units!!Built 2010 to 2019
+DP04_0019P,Percent!!YEAR STRUCTURE BUILT!!Total housing units!!Built 2000 to 2009
+DP04_0020P,Percent!!YEAR STRUCTURE BUILT!!Total housing units!!Built 1990 to 1999
+DP04_0021P,Percent!!YEAR STRUCTURE BUILT!!Total housing units!!Built 1980 to 1989
+DP04_0023P,Percent!!YEAR STRUCTURE BUILT!!Total housing units!!Built 1960 to 1969
+DP04_0024P,Percent!!YEAR STRUCTURE BUILT!!Total housing units!!Built 1950 to 1959
+DP04_0025P,Percent!!YEAR STRUCTURE BUILT!!Total housing units!!Built 1940 to 1949
+DP04_0026P,Percent!!YEAR STRUCTURE BUILT!!Total housing units!!Built 1939 or earlier
+DP04_0028P,Percent!!ROOMS!!Total housing units!!1 room
+DP04_0029P,Percent!!ROOMS!!Total housing units!!2 rooms
+DP04_0030P,Percent!!ROOMS!!Total housing units!!3 rooms
+DP04_0031P,Percent!!ROOMS!!Total housing units!!4 rooms
+DP04_0032P,Percent!!ROOMS!!Total housing units!!5 rooms
+DP04_0033P,Percent!!ROOMS!!Total housing units!!6 rooms
+DP04_0034P,Percent!!ROOMS!!Total housing units!!7 rooms
+DP04_0035P,Percent!!ROOMS!!Total housing units!!8 rooms
+DP04_0040P,Percent!!BEDROOMS!!Total housing units!!1 bedroom
+DP04_0041P,Percent!!BEDROOMS!!Total housing units!!2 bedrooms
+DP04_0042P,Percent!!BEDROOMS!!Total housing units!!3 bedrooms
+DP04_0043P,Percent!!BEDROOMS!!Total housing units!!4 bedrooms
+DP04_0044P,Percent!!BEDROOMS!!Total housing units!!5 or more bedrooms
+DP04_0047P,Percent!!HOUSING TENURE!!Occupied housing units!!Renter-occupied
+DP04_0051P,Percent!!YEAR HOUSEHOLDER MOVED INTO UNIT!!Occupied housing units!!Moved in 2019 or later
+DP04_0053P,Percent!!YEAR HOUSEHOLDER MOVED INTO UNIT!!Occupied housing units!!Moved in 2010 to 2014
+DP04_0054P,Percent!!YEAR HOUSEHOLDER MOVED INTO UNIT!!Occupied housing units!!Moved in 2000 to 2009
+DP04_0055P,Percent!!YEAR HOUSEHOLDER MOVED INTO UNIT!!Occupied housing units!!Moved in 1990 to 1999
+DP04_0056P,Percent!!YEAR HOUSEHOLDER MOVED INTO UNIT!!Occupied housing units!!Moved in 1989 and earlier
+DP04_0058P,Percent!!VEHICLES AVAILABLE!!Occupied housing units!!No vehicles available
+DP04_0059P,Percent!!VEHICLES AVAILABLE!!Occupied housing units!!1 vehicle available
+DP04_0061P,Percent!!VEHICLES AVAILABLE!!Occupied housing units!!3 or more vehicles available
+DP04_0063P,Percent!!HOUSE HEATING FUEL!!Occupied housing units!!Utility gas
+DP04_0065P,Percent!!HOUSE HEATING FUEL!!Occupied housing units!!Electricity
+DP04_0068P,Percent!!HOUSE HEATING FUEL!!Occupied housing units!!Wood
+DP04_0069P,Percent!!HOUSE HEATING FUEL!!Occupied housing units!!Solar energy
+DP04_0073P,Percent!!SELECTED CHARACTERISTICS!!Occupied housing units!!Lacking complete plumbing facilities
+DP04_0074P,Percent!!SELECTED CHARACTERISTICS!!Occupied housing units!!Lacking complete kitchen facilities
+DP04_0075P,Percent!!SELECTED CHARACTERISTICS!!Occupied housing units!!No telephone service available
+DP04_0078P,Percent!!OCCUPANTS PER ROOM!!Occupied housing units!!1.01 to 1.50
+DP04_0079P,Percent!!OCCUPANTS PER ROOM!!Occupied housing units!!1.51 or more
+DP04_0092P,Percent!!MORTGAGE STATUS!!Owner-occupied units!!Housing units without a mortgage
+DP04_0111P,Percent!!SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI)!!Housing units with a mortgage (excluding units where SMOCAPI cannot be computed)!!Less than 20.0 percent
+DP04_0112P,Percent!!SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI)!!Housing units with a mortgage (excluding units where SMOCAPI cannot be computed)!!20.0 to 24.9 percent
+DP04_0113P,Percent!!SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI)!!Housing units with a mortgage (excluding units where SMOCAPI cannot be computed)!!25.0 to 29.9 percent
+DP04_0114P,Percent!!SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI)!!Housing units with a mortgage (excluding units where SMOCAPI cannot be computed)!!30.0 to 34.9 percent
+DP04_0118P,Percent!!SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI)!!Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed)!!Less than 10.0 percent
+DP04_0119P,Percent!!SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI)!!Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed)!!10.0 to 14.9 percent
+DP04_0120P,Percent!!SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI)!!Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed)!!15.0 to 19.9 percent
+DP04_0121P,Percent!!SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI)!!Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed)!!20.0 to 24.9 percent
+DP04_0122P,Percent!!SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI)!!Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed)!!25.0 to 29.9 percent
+DP04_0123P,Percent!!SELECTED MONTHLY OWNER COSTS AS A PERCENTAGE OF HOUSEHOLD INCOME (SMOCAPI)!!Housing unit without a mortgage (excluding units where SMOCAPI cannot be computed)!!30.0 to 34.9 percent
+DP04_0138P,Percent!!GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI)!!Occupied units paying rent (excluding units where GRAPI cannot be computed)!!15.0 to 19.9 percent
+DP04_0139P,Percent!!GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI)!!Occupied units paying rent (excluding units where GRAPI cannot be computed)!!20.0 to 24.9 percent
+DP04_0140P,Percent!!GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI)!!Occupied units paying rent (excluding units where GRAPI cannot be computed)!!25.0 to 29.9 percent
+DP04_0141P,Percent!!GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI)!!Occupied units paying rent (excluding units where GRAPI cannot be computed)!!30.0 to 34.9 percent
+DP04_0142P,Percent!!GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME (GRAPI)!!Occupied units paying rent (excluding units where GRAPI cannot be computed)!!35.0 percent or more
+DP05_0002P,Percent!!SEX AND AGE!!Total population!!Male
+DP05_0003P,Percent!!SEX AND AGE!!Total population!!Female
+DP05_0005P,Percent!!SEX AND AGE!!Total population!!Under 5 years
+DP05_0006P,Percent!!SEX AND AGE!!Total population!!5 to 9 years
+DP05_0007P,Percent!!SEX AND AGE!!Total population!!10 to 14 years
+DP05_0009P,Percent!!SEX AND AGE!!Total population!!20 to 24 years
+DP05_0010P,Percent!!SEX AND AGE!!Total population!!25 to 34 years
+DP05_0011P,Percent!!SEX AND AGE!!Total population!!35 to 44 years
+DP05_0012P,Percent!!SEX AND AGE!!Total population!!45 to 54 years
+DP05_0013P,Percent!!SEX AND AGE!!Total population!!55 to 59 years
+DP05_0014P,Percent!!SEX AND AGE!!Total population!!60 to 64 years
+DP05_0015P,Percent!!SEX AND AGE!!Total population!!65 to 74 years
+DP05_0016P,Percent!!SEX AND AGE!!Total population!!75 to 84 years
+DP05_0017P,Percent!!SEX AND AGE!!Total population!!85 years and over
+DP05_0037P,Percent!!RACE!!Total population!!One race!!White
+DP05_0038P,Percent!!RACE!!Total population!!One race!!Black or African American
+DP05_0040P,Percent!!RACE!!Total population!!One race!!American Indian and Alaska Native!!Cherokee tribal grouping
+DP05_0041P,Percent!!RACE!!Total population!!One race!!American Indian and Alaska Native!!Chippewa tribal grouping
+DP05_0042P,Percent!!RACE!!Total population!!One race!!American Indian and Alaska Native!!Navajo tribal grouping
+DP05_0043P,Percent!!RACE!!Total population!!One race!!American Indian and Alaska Native!!Sioux tribal grouping
+DP05_0045P,Percent!!RACE!!Total population!!One race!!Asian!!Asian Indian
+DP05_0046P,Percent!!RACE!!Total population!!One race!!Asian!!Chinese
+DP05_0047P,Percent!!RACE!!Total population!!One race!!Asian!!Filipino
+DP05_0048P,Percent!!RACE!!Total population!!One race!!Asian!!Japanese
+DP05_0049P,Percent!!RACE!!Total population!!One race!!Asian!!Korean
+DP05_0050P,Percent!!RACE!!Total population!!One race!!Asian!!Vietnamese
+DP05_0052P,Percent!!RACE!!Total population!!One race!!Native Hawaiian and Other Pacific Islander
+DP05_0053P,Percent!!RACE!!Total population!!One race!!Native Hawaiian and Other Pacific Islander!!Native Hawaiian
+DP05_0054P,Percent!!RACE!!Total population!!One race!!Native Hawaiian and Other Pacific Islander!!Chamorro
+DP05_0055P,Percent!!RACE!!Total population!!One race!!Native Hawaiian and Other Pacific Islander!!Samoan
+DP05_0059P,Percent!!RACE!!Total population!!Two or more races!!White and Black or African American
+DP05_0060P,Percent!!RACE!!Total population!!Two or more races!!White and American Indian and Alaska Native
+DP05_0061P,Percent!!RACE!!Total population!!Two or more races!!White and Asian
+DP05_0062P,Percent!!RACE!!Total population!!Two or more races!!Black or African American and American Indian and Alaska Native
+DP05_0072P,Percent!!HISPANIC OR LATINO AND RACE!!Total population!!Hispanic or Latino (of any race)!!Mexican
+DP05_0073P,Percent!!HISPANIC OR LATINO AND RACE!!Total population!!Hispanic or Latino (of any race)!!Puerto Rican
+DP05_0074P,Percent!!HISPANIC OR LATINO AND RACE!!Total population!!Hispanic or Latino (of any race)!!Cuban
+DP05_0075P,Percent!!HISPANIC OR LATINO AND RACE!!Total population!!Hispanic or Latino (of any race)!!Other Hispanic or Latino
+DP05_0089P,"Percent!!CITIZEN, VOTING AGE POPULATION!!Citizen, 18 and over population!!Female"

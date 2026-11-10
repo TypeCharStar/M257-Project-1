@@ -1,0 +1,504 @@
+---
+title: "A Higher Dimension: Can Principal Component Analysis Improve Predictions of County-Level Support for 2022 Marijuana Legalization Ballot Measures Based On Population Demographics?"
+author: "Charlin Duff"
+thanks: "Project repository available at: [https://github.com/TypeCharStar/M257-Project-1](https://github.com/TypeCharStar/M257-Project-1)."
+date: today
+date-format: long
+format: pdf
+bibliography: 257p1_references.bib
+nocite: |
+  @*
+link-citations: true
+
+header-includes:
+  - \usepackage{xcolor}
+---
+## Introduction
+
+The process of getting an initiative placed on a ballot can be a long and arduous process. Then there is still the possiblity it could fail to pass if voters are disinterested. Wouldn't it be nice to know if an initiative is worth pursuing before you start the process? To read the minds of a voting population?  Well, we can't do that. No one can do that. However, we can use statistical tools like prediciton models to get a better understanding of whether underlying demographic characteristics of a population can signal anything about how they may vote on a ballot measure.
+
+Prediction models can help us better understand suspected relationships between a set of predictors and an outcome. When constructing prediction models, it is important to always check your model's assumptions. When we ignore model assumptions, predictions can go awry, and the model may not produce realistic or usable results. In this paper we explore a case where a model breaks down: having fewer observations than predictiors in a multiple regression model. Then, a potential workaround: using principal component analysis to reduce the dimension of our predictors while retaining as much of the original variance in those lower dimensional predictors. 
+
+This allows us to fit a reduced dimension version of our original model and construct a working prediction model for our research question: Can population demographics of a county predict the share of votes in favor of 2022 statewide marijuana legalization ballot measures?
+
+The dataset we use for this study comprises 220 predictor population demographic variables obtained from the U.S. Census ACS 5-Year Estimates for 2017-2021, and 2022 election outcomes by county for the 5 states who votes on recreational marijuana legalization ballot measures that year.
+
+We investigate our research question using methods like Leave-One-Group-Out for model cross validation, Principal Component Analysis (PCA) for dimension reduction, Multiple Linear Regression for the predictor models, and model comparison metrics like Mean Absolute Error (MAE), Root Mean Square Error (RMSE), and the cross-validated $R^2$.
+
+We find that reducing the dimension of our original predictors with PCA and refitting the model *does* improve stability and produce much more reasonable predictions. This demonstrates one way in which dimension reduction can be used to improve prediction model performance when working with *higher dimension* datasets.
+
+
+## Data
+The observational units of our dataset are all 333 counties across the states of North Dakota, South Dakota, Arkansas, Maryland, and Missouri. Our predictor variables consist of 220 county-level demographic estimates, and our response variable consists of the proportion of votes cast in favor of statewide recreational marijuana legalization ballot measures in the 2022 general election. 
+
+The dataset used in this project was compiled from a few different sources. We gathered all our demographic variables from the U.S. Census Bureau’s American Community Survey 5-Year Data for 2017-2021 [@census_acs5_data_2021]. We opted for this particular 5-year range as it gives us the most recent demographic data to the 2022 general election, while still ensuring that all data was collected prior to the election. The 5-year ACS samples approximately 3.54 million addresses annually, with no address being resampled within a 5-year period. This results in an approximate 17.7 million unique addresses sampled for the 2017-2021 estimates. These addresses are contacted directly and responses are collected via mail, phone, and computer. Once the data is collected, The Census Bureau uses weighting techniques to account for bias that could stem from different factors like under/over-coverage of areas, non-response bias, potential sampling bias, and other factors. This improves how representative the estimates are of the target populations. More information about the methodology of the 2017-2021 ACS 5-year estimate can be found in their official Accuracy of the Data statement [@census_acs_accuracy_2017_2021].
+
+We opted to use the Survey Data Profiles, which contains broad social, economic, housing, and demographic information both as numeric estimates and population percentages. We use the population percentage version of the variables to help control for differences in county populations. We used 220 variables that represent various housing, employment, income, race, education, and other demographic characteristics. The full list of the exact variables we used and their description can be found in the project repository. We took care to not include obviously redundant variables, and to exclude a reference group for related groups of variables that all together cover the entire population. The reported margin of error at the 90% confidence level for each county estimate is provided alongside the point estimates in the project repository. A 90% confidence interval can be constructed for each point estimate via the formula $(\text{Point Estimate}) \pm (\text{Margin of Error})$. We note that 1.6% of the county-level estimates used in our analysis have a recorded margin of error above 20 percentage points, and another 0.5% have missing values. The large margins of error indicate greater uncertainty of the corresponding estimates, while the missing values indicate the level of uncertainty surrounding the estimate is unknown. We did not remove these imprecise estimates from the analysis, but we note that they may introduce noise, and our results should be interpreted cautiously. 
+
+We performed the following transformations on missing values found in our demographic dataset:
+
+- Transformed NA values associated with the Census variables: `DP02_0096P`, `DP02_0104P`, `DP02_0106P`, `DP02_0107P`, `DP02_0108P`, `DP02_0109P`, `DP02-0110P` into zeros. These variables all relate to residents in a population who were born outside the U.S. This transformation seemed appropriate since the value of `DP02_0094P`, the percentage of foreign-born residents in a county, was zero for these counties. If there are no foreign-born residents in the population, then it seems plausible that the variables representing foreign born residents from specific continents or of specific citizenship status are all zero as well.
+
+- Transformed NA values associated with Census variables: `DP03_0112P` & `DP03_0113P`. These variables represent the percentage of unemployed residents receiving public coverage health insurance, and unemployed residents with no health insurance respectively. 3 counties had NA values for either of these categories: Jerauld, SD, Haakon, SD, and Foster, ND. The estimated unemployment rate (`DP09_0009P`) in Jerauld County was 0%, Haakon County was 1%, and Foster County was 0.1%. We imputed both variables for Jerauld County with 0 since it made sense that neither of these variables would take a value if estimated unemployment was 0. For Haakon County and Foster County, we imputed the missing values with the state median for the respective variables; this seemed appropriate since both variables have a right-skewed distribution.
+
+
+We calculated county-level percentages of votes in favor of recreational marijuana legalization ballot measures during the 2022 general election by compiling official election data from the 5 states that voted on it. For Arkansas, this was listed on the ballot as Issue No. 4, and we obtained results from the Arkansas Secretary of State [@arkansas_election_results_2022_issue4]. In Maryland, this was listed on the ballot as Question 4, and we obtained results from the Maryland State Board of Elections [@maryland_election_results_2022]. In Missouri, this was listed on the ballot as Amendment 3, and we obtained results from the Missouri Secretary of State’s Office [@missouri_election_results_2022]. For North Dakota, this was listed on the ballot as Initiated Statutory Measure No. 2, and we obtained results from the North Dakota Secretary of State’s Office [@north_dakota_election_results_2022]. Finally, in South Dakota, this was listed on the ballot as Initiated Measure 27, and we obtained results from the South Dakota Secretary of State’s Office [@south_dakota_election_results_2022]. None of the 333 individual counties contained missing data.
+
+We combined the ACS 5-year estimate data and the election data by first assigning all counties in the combined election data their Census GEOID in a separate column, then joined the two datasets on the shared GEOID column. All 333 counties were joined successfully.
+
+## Methods
+1. **Leave-One-Group-Out Cross Validation**
+
+Leave-One-Group-Out Cross Validation is a model validation technique where we split our data into $n$ groups based on some sort of shared similarity, then train our model on $n-1$ of the groups, and use the held out group as our test data. This process is repeated $n$ times, until each group has had a chance to be the test set.
+
+In our case, the 5 states in our dataset represent the groups, and we train our models on the counties from 4 states and test it on the counties from the 5th held out state. We repeat the process 5 times until each state has had a chance to be the test state.
+
+To implement this method in R [@r_core_team] we run our model fitting inside a for-loop that loops through each of 5 states' unique FIPS codes, and uses the assigned FIPS code of the current test state to separate the original dataset into a training set `X_train` containing all rows that do not correspond to the current FIPS code, and a test set `X_test` with all the rows that *do* correspond. Then our models are trained on the training set, applied to the testing set, and predictions for the current test state are stored for later evaluation before moving on to the next state.
+
+
+2. **Principal Component Analysis:**
+
+Principal Component Analysis (PCA) is a dimension reduction technique that takes in a data matrix $X \in \mathbb{R}_{m \times n}$, and (in our case) standardizes it by first subtracting out the respective column mean from each entry, then computes $X_{s} = X_{c}D^{-1/2}$, where $X_{c}$ is our centered version of $X$, and $D^{-1/2}$ is a diagonal matrix with diagonal entries $1/s_1,\cdots,1/s_n$, where $s_i$ corresponds to the sample standard deviation of the $i$th column of $X$.
+
+After standardizing, rank-$k$ Singular Value Decomposition is performed, approximating $X_{s}$ as:
+$$X_{s} \approx U_k \Sigma_k V_k^{\top}$$
+Here the matrix $V_{k}$ has columns $[\textbf{v}_1,\cdots,\textbf{v}_k]$ representing the first $k$ principal directions of $X_s$. We can interpret the **principal directions** as the unit eigenvectors corresponding to the $k$ largest eigenvalues of the sample correlation matrix: $R = \dfrac{1}{m-1}X_s^\top X_s$. These form an orthonormal basis of our reduced $k$-dimensional subspace, for which the projections of our data will have maximum variance.
+
+The rows of $V_k$ correspond to the columns of our original dataset, and each entry $v_{i,j} \in V_k$ represents the contribution of the $i$th original column $(\textbf{x}_i)$, to the $j$th principal direction $\textbf{v}_j$.
+
+Projecting $X_{s}$ onto the first $k$ principal directions yields the matrix $Y_k$ whose columns are the first $k$ **principal components**: $Y_k = X_{s}V_k = [\textbf{y}_1,\cdots,\textbf{y}_k]$. The principal components represent the new coordinates of each observation in the reduced dimension basis. 
+
+The proportion of the variance of $X_s$ retained by the first $k$ principal components can be calculated by dividing the sum of the first $k$ largest eigenvalues of $R$ by the sum of all $n$ eigenvalues of $R$:
+$$\text{Variance retained} = \dfrac{\lambda_1+\cdots+\lambda_k}{\lambda_1+\cdots+\lambda_n}$$
+
+In summary, Principal Component Analysis allows us to recapture the greatest amount of variance found in the original demographic predictors that can be contained in $k$ new, lower-dimensional predictors. This helps mitigate issues that arise in various modelling techniques from having too many predictors, multicollinearity, or simply having a *high dimensional* dataset.
+
+To perform PCA on our data in R, we use the `prcomp()` function on our training data, `X_train`, to reduce the number of predictors from 220 to 10, while maximizing the original variance retained within those 10 PCs. `X_test`, our testing data is then centered and rescaled using the mean and sample standard deviation matrix of `X_train` before being projected on to the principal directions of `X_train`. The resulting principal components are used to apply the model and make predictions for our test state. Our choice to use 10 principal components is arbitrary, though a specific number of principal components could have been more methodically decided based on how much of the original variance one wishes to retain.
+
+3. **Multiple Regression**
+
+To model the relationship between our predictor variables and our outcome variable, we fit two versions of a multiple regression model:
+
+The first multiple regression model uses all 220 demographic predictor variables in the original dataset and takes the form:
+$$Y_i = \beta_0 + \beta_1X_{i1} + \cdots + \beta_{220}X_{i220} + \varepsilon_i$$
+Where:\
+- $Y_i$ represents the proportion of 'in favor' votes of the $i$th county.\
+- $X_1,\cdots,X_{220}$ represent our 220 demographic predictor variables.\
+- $\beta_0$ represents the value of $Y_i$ when all $X_i$ are equal to 0.\
+- Each $\beta_i \in {\beta_1,\cdots,\beta_{220}}$ represents the change in $Y_i$ per one percentage point increase in the corresponding predictor $X_i \in {X_1,\cdots,X_{220}}$, of the $i$th county holding all other 219 predictors constant. \
+- $\varepsilon_i$ represents uncertainty in the 'in favor' vote proportion of the $i_{\text{th}}$ county that can not be explained by our predictor variables.\
+
+The second model uses the first 10 principal components of the dataset as predictor variables and takes the form:
+$$Y_i = \alpha_0 + \alpha_1Z_{i1} + \cdots + \alpha_{10}Z_{i10} + \varepsilon_i$$
+Where:\
+- $Y_i$ represents the proportion of 'in favor' votes of the $i$th county.\
+- $Z_1,\cdots,Z_{10}$ represent our predictor variables, which are the first 10 principal components of the original predictors.\
+- $\alpha_0$ represents the value of $Y_i$ when all $Z_i$ are equal to 0.\
+- Each $\alpha_i \in {\alpha_1,\cdots,\alpha_{10}}$ represents the change in $Y_i$ per one unit increase in the corresponding principal component $Z_i \in {Z_1,\cdots,Z_{10}}$, of the $i$th county, holding all other predictors constant. \
+- $\varepsilon_i$ represents uncertainty in the 'in favor' vote proportion of the $i_{\text{th}}$ county that cannot be explained by our predictor variables.\
+
+We fit each of these models in R using the `lm()` function.
+
+4. **Model Comparison Metrics**
+
+To compare how well the full regression model generalizes to an unseen state versus the PCA regression model we look at three metrics: Mean Absolute Error, Root Mean Square Prediction Error,  and cross validated $R^2$.
+
+Mean Absolute Error (MAE) is calculated via the formula:
+$$\text{MAE} = \dfrac{\Sigma_{i=1}^n|Y_i - \hat{Y_i}|}{n}$$
+ Here $Y_i$ represents the observed outcome for a county in our test data, and $\hat{Y_i}$ represents our model's prediction for $Y_i$. $n$ represents the number of observations in the test data.
+
+ We include MAE in our analysis because it is an easily interpretable metric to use when discussing prediction error. It is simply how far the model's predictions are from the observed values on average. A lower MAE means the model predicts outcomes closer to the actual outcomes on average.
+
+Root Mean Square Prediction Error (RMSE) is calculated via the formula:
+ $$\text{RMSE} = \sqrt{\dfrac{\Sigma_{i=1}^n(Y_i - \hat{Y_i})^2}{n}}$$ 
+ Here, once again, $Y_i$ represents the observed outcome for a county in our test data, and $\hat{Y_i}$ represents our model's prediction for $Y_i$. $n$ represents the number of observations in the test data.
+
+RMSE also lets us measure how close our models' predictions are to the observed outcomes. We choose RMSE over mean square error as a metric for consistency and interpretability alongside MAE. Unlike MAE, RMSE punishes larger errors, so including it will give us a better idea of how severe the largest prediction errors are. The lower a model's RMSE, the better it is at predicting outcomes for the test data.
+
+We also compare the models' cross-validated $R^2$ value. $R^2$ is calculated via the formula: $$R^2 =1 - \dfrac{SS_{res}}{SS_{tot}} = 1- \dfrac{\Sigma_{i=1}^n(Y_i - \hat{Y_i})}{\Sigma_{i=1}^n(Y_i - \bar{Y})}$$
+ Here $Y_i$ represents the observed outcome for a county in our test data, and $\hat{Y_i}$ represents our model's prediction for $Y_i$. $\bar{Y}$ represents the mean outcome, and $n$ represents the number of observations in the test data.
+
+ $R^2$ measures the predicitve accuracy of a model compared to just predicting the mean for every outcome:\
+ - $R^2 = 1$: The model predicts our outcome variable perfectly.\
+ - $0< R^2 <1$: Represents the proportion of variance in the unseen/test outcomes explained by our model.\
+ - $R^2 = 0$: The model is no better at predicting the outcome than if we were to just predict the mean response $(\bar{Y})$ for every $Y_i$.\
+ - $R^2 < 0$: The model performs *worse* than if we were to just predict the mean response for every outcome.\
+ \
+
+ We note that our outcome variable represents a proportion and is thus bounded between 0 and 1. Bounded outcome variables can hinder a model's ability to meet the required assumptions of linear regression, especially when observations gather towards the endpoints of the bounds. In our case, our observed $Y_i$'s lie well within our endpoints, spanning from 0.17 to 0.8. Since we do not observe large clusterings of observed outcomes near 0 or 1, we are not particularly concerned with possible non-linearity or issues with our model errors that would arise from a bounded response.
+
+**Expectations**
+
+ Implementing these methods, we expect to see the full linear regression model perform substantially worse than the PCA linear regression model.
+ 
+ For a multiple regression model to provide stable test predictions, besides the core model assumptions, the number of observations must be much much greater than the number of predictors in the model. We have 333 observations in the full dataset, but using leave-one-state-out validation means that when Arkansas (75 observations) or South Dakota (66 observations) are our test state, the number of observations in our training dataset treads dangerously close to the number of predictors: 220. Even more concerning is when Missouri (115 observations) is the test state. Here, the number of observations in our training set actually drops below the number of predictors, meaning a unique least squares estimate will generally not exist, and our test predictions will be unstable.
+
+ We expect the PCA linear regression model to improve on this issue of instability substantially. By using the first 10 principal components as our predictors, the number of training observations in any fold stays significatly larger than the number of predictors. 
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+#| echo: false
+# load libraries
+library(tidyverse)
+library(ggpubr)
+library(patchwork)
+library(ggplot2)
+library(ggrepel)
+library(knitr)
+
+data <- read.csv("C:/Users/charl/Documents/Positron Docs/county_data_hv.csv",
+        colClasses = c(GEOID = "character"), stringsAsFactors = FALSE)
+
+# drop uneeded columns
+data <- subset(data, select = -c(NAME, Pct.No, In.Favor))
+
+# Extract the first two characters as the state FIPS code
+data$state_fips <- substr(data$GEOID,1,2)
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# Exclude identification and outcome varaible from predictors
+predictor_names <- setdiff(names(data),
+  c("GEOID", "state_fips", "Pct.Yes"))
+
+# store unique state fips for looping
+states <- unique(data$state_fips)
+
+# initialize results data frame
+validation_results <- data.frame(
+  state_fips = data$state_fips,
+  observed = data[["Pct.Yes"]],
+  full_mod = NA_real_,
+  pca_mod = NA_real_,
+  pca_k = 10,
+  pca_variance_explained = NA_real_
+)
+
+# define validation metrics
+calculate_metrics <- function(observed, predicted) {
+  
+  residuals <- observed - predicted
+  
+  rmse <- sqrt(mean(residuals^2))
+
+  mae <- mean(abs(residuals))
+  
+  r_squared <- 1 -
+    sum(residuals^2) /
+    sum((observed - mean(observed))^2)
+  
+  return(data.frame(
+    MAE = mae,
+    RMSE = rmse,
+    'R Squared' = r_squared
+  ))
+}
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| output: false
+
+# Formula for the full LRmodel
+full_formula <- reformulate(termlabels = predictor_names, response = "Pct.Yes")
+
+# loop to implement LOGO validation
+for (test_state in states) {
+  
+  # Split into training states and held-out state
+  train_data <- data[data$state_fips != test_state,]
+  
+  test_data <- data[data$state_fips == test_state,]
+  
+  
+  # ~~~~~~~~ Full model ~~~~~~~~~
+  
+  # fit full LR model
+  full_model <- lm(formula = full_formula, data = train_data)
+  
+  # store predictions made for current test state
+  full_predictions <- predict(full_model, newdata = test_data)
+  
+  # get index of rows that correspond to test state in results data frame
+  test_rows <- which(validation_results$state_fips == test_state)
+  
+  # store test state's full LR model predictions in result data frame
+  validation_results$full_mod[test_rows] <- full_predictions
+  
+  
+  # ~~~~~~~~ PCA model ~~~~~~~~~~
+  
+  # prepare data for PCA by converting to matrix
+  X_train <- as.matrix(train_data[, predictor_names])
+  
+  X_test <- as.matrix(test_data[, predictor_names])
+
+  # Fit PCA using training data only
+  pca <- prcomp(X_train, center = TRUE, scale. = TRUE)
+
+  # calculate variance explained by 10 PCs
+  variance_explained <- pca$sdev^2 /sum(pca$sdev^2) 
+  
+  var_exp <- sum(variance_explained[1:10])
+  
+  # transform model training data to have columns that are the first 10 PCs
+  train_pc <- as.data.frame(pca$x[, 1:10, drop = FALSE])
+  
+  names(train_pc) <- paste0("PC", 1:10)
+  
+  # scale held-out test data using the center and scale determined by the training data PCA
+  X_test_scaled <- scale(X_test, center = pca$center, scale = pca$scale)
+  
+  # calucluate values of the first 10 PCs for the test data by multiplying test X_s by V_10
+  test_pc_matrix <- X_test_scaled %*% pca$rotation[, 1:10, drop = FALSE]
+  
+  test_pc <- as.data.frame(test_pc_matrix)
+
+  names(test_pc) <- paste0("PC", 1:10)
+  
+  # add response variable back to training data frame
+  train_pc$response <- train_data[["Pct.Yes"]]
+  
+  # fit LR using the principal components
+  pca_formula <- reformulate(
+    termlabels = names(train_pc)[names(train_pc) != "response"], 
+    response = "response")
+  
+  pca_lm <- lm(formula = pca_formula, data = train_pc)
+  
+  # predict the held-out state outcomes
+  pca_predictions <- predict(pca_lm, newdata = test_pc)
+  
+  # store results from PCA LR model in results data frame
+  validation_results$pca_mod[test_rows] <- pca_predictions
+
+  validation_results$pca_variance_explained[test_rows] <- var_exp
+}
+```
+
+## Results
+
+**Full Linear Regression Model**
+
+When we fit the full linear regression model using leave-one-state-out validation we run into the expected issues. The training sets where the number of observations gets close to and even surpasses the number of predictors does introduce instability to the test predictions. We can visualize this below on the residuals vs. fitted values plot of the cross-validated model predictions for each test state.
+
+```{r}
+#| warning: false
+#| echo: false
+#| fig-cap: "Residuals vs. fitted values plot for the cross-validated results of the full multiple regression model which predicts the proportion of 'in favor' votes on 2022 statewide marijuana legalization ballot measures by 220 population demographic predictor variables. Each observation represents a county in Arkansas, Maryland, Missouri, North Dakota, or South Dakota."
+
+# state FIPS to names key
+state_lookup <- c(
+  `05` = "Arkansas",
+  `24` = "Maryland",
+  `29` = "Missouri",
+  `38` = "North Dakota",
+  `46` = "South Dakota"
+)
+
+# create data frame of full model fits vs residuals by state
+fm_residuals <- validation_results %>%
+  mutate(
+    fitted = full_mod,
+    residual = observed - full_mod,
+    state_fips = state_fips,
+    state_fips_clean = sprintf("%02d", as.integer(as.character(state_fips))),
+    held_out_state = unname(state_lookup[state_fips_clean])
+  )
+
+# plot it
+  ggplot(fm_residuals, aes(x = fitted, y = residual, color = factor(held_out_state))) +
+  geom_point(alpha = 0.7, size=0.8) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  labs(
+    title = "Full Regression Model Residuals vs. Fitted Values",
+    subtitle = "Cross-Validated Results of Full Multiple Regression Model",
+    x = "Fitted values",
+    y = "Residuals",
+    color = "Held-Out State"
+  ) +
+  theme_minimal()
+
+```
+
+Very apparent is the effect of the fold where Missouri is held-out. The training data has fewer observations than predictors, so the model's predictions become unstable. Since a unique solution to the least squares estimates do not exist for this model, the estimates depend on the particular least-squares solution used for the coefficients. The linear pattern we see is consistent with this type of instability. 
+
+To get an idea of how the full linear regression model does when predicting test outcomes we can look at the predicted vs. observed values plot below.
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-cap: "Predicted vs. observed values plot for the predictions of the full multiple regression model which predicts the proportion of 'in favor' votes on 2022 statewide marijuana legalization ballot measures by 220 population demographic predictor variables. Each observation represents a county in Arkansas, Maryland, Missouri, North Dakota, or South Dakota."
+
+validation_results <- validation_results %>% mutate(    
+    state_fips_clean = sprintf("%02d", as.integer(as.character(state_fips))),
+    held_out_state = unname(state_lookup[state_fips_clean])
+    )
+
+# full model plot
+full_plot <- ggplot(validation_results, aes(x = full_mod, y = observed, color = factor(held_out_state))) +
+  geom_point(alpha = 0.7, size = 0.8) +
+  geom_abline(
+    slope = 1,
+    intercept = 0,
+    linetype = "dashed",
+    color = "black"
+  ) +
+  labs(
+    title = "Full Regression Model Predicted vs. Observed Values",
+    subtitle = "Cross-Validated Results of Full Multiple Regression Model",
+    x = "Predicted values",
+    y = "Observed values",
+    color = "State"
+  ) +
+  theme_minimal()
+
+full_plot
+```
+
+Here we see that many of the predictions for Missouri counties lie far outside of the range of observable outcomes, which is $[0,1]$. Our dimensionality issues may be contributing to the failure of the full model as a predictive tool.
+
+**PCA Regression Model**
+
+For the PCA model, we begin in each fold by seperating out the data for the test state, then performing PCA on the matrix whose columns are the predictors for the training data. The first 10 principal components are stored as columns for our new predictor matrix. In the table below, we can see how much variance of the full predictor dataset was retained within the 10 components for each of our folds.
+
+```{r}
+#| echo: false
+#| warning: false
+
+pca_summary <- aggregate(
+  cbind(pca_k, pca_variance_explained) ~ state_fips,
+  data = validation_results,
+  FUN = unique
+)
+
+pca_summary <- pca_summary %>%
+    mutate(
+    state_fips_clean = sprintf("%02d", as.integer(as.character(state_fips))),
+    'Held Out State' = unname(state_lookup[state_fips_clean]),
+    PCs = pca_k,
+    'Variance Explained' = pca_variance_explained
+)
+
+pca_table <- 
+    subset(pca_summary, select = -c(state_fips,pca_k,state_fips_clean,pca_variance_explained))
+
+knitr::kable(
+  pca_table,
+  caption = "Variance explained by the first 10 principal components of the predictor matrix when each state is removed from the training data.",
+  digits = 3
+)
+```
+
+As we see, 10 principal components retains around 50% of the original training dataset's variance. This may be cause for concern if we were worried about reconstruction, or producing the most accurate model. However, since we are mainly focused on dimension reduction and predictive ability, we are okay with a lower amount of variance explained.
+
+Fitting the linear regression model on the first 10 principal components of the original predictors yields a much healthier looking residuals vs. fitted values plot. For this model, regardless of which fold we are in, the training data always has many more observations than predictors.
+
+```{r}
+#| warning: false
+#| echo: false
+#| fig-cap: "Residuals vs. fitted values plot for the cross-validated results of the multiple regression model which predicts the proportion of 'in favor' votes on 2022 statewide marijuana legalization ballot measures using the first 10 principal components of the original predictor variables as predictors. Each observation represents a county in Arkansas, Maryland, Missouri, North Dakota, or South Dakota."
+pca_residuals <- validation_results %>%
+  mutate(
+    fitted = pca_mod,
+    residual = observed - pca_mod,
+    state_fips = state_fips,
+    state_fips_clean = sprintf("%02d", as.integer(as.character(state_fips))),
+    held_out_state = unname(state_lookup[state_fips_clean])
+  )
+
+  ggplot(pca_residuals, aes(x = fitted, y = residual, color = factor(held_out_state))) +
+  geom_point(alpha = 0.7, size = 0.8) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  labs(
+    title = "Principal Component Regression Residuals vs. Fitted Values",
+    subtitle = "Cross-Validated Results of Multiple Regression Model with 
+Principal Component Predictors",
+    x = "Fitted values",
+    y = "Residuals",
+    color = "Held-Out State"
+  ) +
+  theme_minimal()
+```
+
+While the spread of observations shows no signs of heteroskedasticity, we do note that some other issues may be present in the model. We can not rule out the fact that the error terms may be dependent for counties located within the same state, or that border geographically. In fact, we can see some very apparent clustering of residuals for Arkansas and Maryland. This means our model may not meet all the necessary assumptions of linear regression, and our predictions may be more error prone than if we used a model that accounts for this dependence.
+
+To get an idea of how the PCA linear regression model does when predicting test outcomes we can look at the predicted vs. observed values plot below.
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-cap: "Predicted vs. observed values plot for the predictions of the multiple regression model which predicts the proportion of 'in favor' votes on 2022 statewide marijuana legalization ballot measures using the first 10 principal components of the original predictor variables as predictors. Each observation represents a county in Arkansas, Maryland, Missouri, North Dakota, or South Dakota."
+
+pca_plot <- ggplot(validation_results, aes(x = pca_mod, y = observed, color = factor(held_out_state))) +
+  geom_point(alpha = 0.7, size = 0.8) +
+  geom_abline(
+    slope = 1,
+    intercept = 0,
+    linetype = "dashed",
+    color = "black"
+  ) +
+  labs(
+    title = "Principal Component Regression Predicted vs. Observed",
+    subtitle = "Cross-Validated Results of Multiple Regression Model with 
+Principal Component Predictors",
+    x = "Predicted values",
+    y = "Observed values",
+    color = "State"
+  ) +
+  theme_minimal()
+
+pca_plot
+```
+
+Here our model's predictions become much more stable and reasonable. While the predictions are a bit noisy, no predicted values lie outside the range of observable values. The demographic conditions that produced higher observed values produce higher predicted values in our model. Most predictions seem to lie within 15 percentage points of the associated observed values. We do note that the model tends to over-estimate voter share for counties in Arkansas, and under-estimate counties in Maryland. This could mean that there are important differences between these states and the others used for training in that state's test fold that our model is not accounting for.
+
+{{< pagebreak >}}
+
+**Comparison**
+
+To evaluate the performance of both models, we look at the below table of metrics.
+```{r}
+#| echo: false
+#| warning: false
+
+full_metrics <- calculate_metrics(validation_results$observed,validation_results$full_mod)
+pca_metrics <- calculate_metrics(validation_results$observed,validation_results$pca_mod)
+
+comparison_metrics <- bind_rows(full_metrics,pca_metrics)
+
+comparison_metrics <- cbind(Model = c("Full", "PCA"), comparison_metrics)
+comparison_metrics <- comparison_metrics %>% rename('R Squared' = R.Squared)
+
+knitr::kable(
+  comparison_metrics,
+  caption = "Performance Metrics for Full Model & PCA Model ",
+  digits = 3
+)
+```
+
+On average the full model makes predictions that are 150.5 percentage points away from the observed values, while the PCA model on average makes predictions that are 5.2 percentage points away from the observed values. The RMSE, which places more weight on large prediction errors, is 306.6 percentage points for the full model and 6.8 percentage points for the PCA model. These results tell us that the full model is not only making distant and unreasonable predictions on average, but it is making a lot of very large errors. The PCA model on the other hand, is making relatively small prediction errors on average, and relatively few very large errors. The PCA model seems to do a much better job of placing predictions in the ballpark of the observed values.
+
+The negative $R^2$ value for the full regression model tells us that the model showed extremely poor performance when attempting to generalize to the test states, doing a worse job of predicting voter share than if we just predicted the mean voter share for every county. This aligns with the instability we have seen. On the other hand, the PCA model's $R^2$ tells us that our model explains 54% of the variation present in test states' voter share. That is a notable improvement upon the full model, and indicates decent performance for modelling something as difficult to predict as voter share. 
+
+## Discussion
+
+Through this analysis we learned that principal component analysis can be an effective tool for fitting prediction models when the number of observations in your data is close to, or even less than, the number of predictors. We were able to convert a model that was making unstable and impossible predictions into a simpler model that provided much more stable and plausible predictions. Our full linear regression model produced an RMSE of 306.6 percentage points while the dimension-reduced PCA regression model produced an RMSE of 6.8 percentage points, showing that the PCA model generalizes to an unseen test state much better than the full model.
+
+Our study is not without its limitations though. We tested other candidate models on the full dataset to get an understanding of when PCA may make a difference before deciding on linear regression, since we knew it would break under the full dataset. Due to this, the actual predictive power of our models should be taken lightly as the results may be impacted by model selection bias. A potential improvement for this study would be to carry out the same analysis for the 5 states that voted on marijuana legalization in 2016 using the same 220 predictor variables from the Census ACS 5-year estimates for 2010-2015, and seeing if similar results are found.
+
+Using location dependent observations to fit a linear regression model is also inadvisable. There is a good chance that error terms of our models are correlated between counties located in the same state, or nearby each other. This dependence can cause predictions from a linear regression model to be less accurate, since it assumes every error term is independent of the others.
+
+Looking forward, this analysis could prompt further research into how population demographics of U.S. counties can be used to predict other nonpartisan election results. One could even include predictor variables on county voter registration or about the religious makeup of a population, to potentially produce a stronger predictor dataset that accounts for more of the factors influencing decisions voters make at the polls.
+
+{{< pagebreak >}}
+
+## References

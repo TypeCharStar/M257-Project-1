@@ -10,7 +10,7 @@ Project Repository Contents:
 * project_predictor_variables.csv -> Comprehensive list of all 220 predictor variables and their description
 * predictor_variables_moe.csv -> Margin of error for the 90% confidence interval of all variable point estimates by county
 
-External Resources:
+External Resources:\
 Documentation help from ChatGPT & Google's AI Overview tool was used for assistance with R code used for data processing and producing figures.
 
 Data Licensing:
